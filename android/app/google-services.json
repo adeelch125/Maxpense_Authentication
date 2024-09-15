@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "611264861514",
+    "project_id": "authentication-c91f8",
+    "storage_bucket": "authentication-c91f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611264861514:android:cdb711c2fea3b77eb15db3",
+        "android_client_info": {
+          "package_name": "com.example.max_pense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8uidmyVpN_zxVD4-8S1CmYn7vo1I9UeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
