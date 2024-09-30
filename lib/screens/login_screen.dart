@@ -145,7 +145,7 @@ class LoginScreen extends StatelessWidget {
           GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>ForgotPasswordScreen()));
+                MaterialPageRoute(builder: (context) =>const ForgotPasswordScreen()));
           },
       child: RichText(
         text: const TextSpan(
@@ -236,7 +236,7 @@ class LoginScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()));
+                  MaterialPageRoute(builder: (context) => const RegisterScreen()));
               },
             child: RichText(
               text: const TextSpan(

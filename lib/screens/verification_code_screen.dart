@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:max_pense/screens/new_password_screen.dart';
-import 'package:max_pense/screens/register_screen.dart';
-import 'package:max_pense/screens/register_verification.dart';
-
 import '../assets/assets.dart';
 import '../colors/app_colors.dart';
 class VerificationCodeScreen extends StatelessWidget{
-  VerificationCodeScreen({super.key});
+  const VerificationCodeScreen({super.key});
 
 
   @override
@@ -101,7 +98,7 @@ class VerificationCodeScreen extends StatelessWidget{
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>NewPasswordScreen()));
+                        MaterialPageRoute(builder: (context) =>const NewPasswordScreen()));
                   },
                   child: const Text(
                     'Submit',
