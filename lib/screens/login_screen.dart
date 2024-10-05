@@ -7,7 +7,14 @@ import 'package:max_pense/screens/register_screen.dart';
 import '../assets/assets.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
+  final _email =TextEditingController();
+  final _password = TextEditingController();
+
+  void dispose(){
+     _email.dispose();
+     _password.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +66,12 @@ class LoginScreen extends StatelessWidget {
               ),
         TextFormField(
           keyboardType: TextInputType.text,
+          controller: _email,
+
           decoration: InputDecoration(
             hintText: 'Ex: abc@example.com',
+
+
             hintStyle: const TextStyle(color: AppColors.hintColor),// Hint text
             prefixIcon: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -106,6 +117,9 @@ class LoginScreen extends StatelessWidget {
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
+
+                controller: _password,
+
                 obscureText: true, // This makes the text input behave like a password field
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
@@ -237,7 +251,7 @@ class LoginScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                  MaterialPageRoute(builder: (context) =>  RegisterScreen()));
               },
             child: RichText(
               text: const TextSpan(
