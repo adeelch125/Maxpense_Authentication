@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:max_pense/screens/auth_service.dart';
 
 import '../assets/assets.dart';
@@ -19,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _email = TextEditingController();
   final _name = TextEditingController();
   final _password = TextEditingController();
+  bool _isLoading = false; // Loading state variable
 
   @override
   void dispose() {
@@ -42,7 +42,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 3),
               const Text(
                 'Register',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               ),
               const SizedBox(height: 7),
               const Text(
@@ -175,26 +178,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: TextButton(
-                  onPressed: () => _signUp(context),
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
+                  onPressed: _isLoading ? null : () => _signUp(context),
+                  // Disable button when loading
+                  child: _isLoading // Show progress indicator or text
+                      ? const CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        )
+                      : const Text(
+                          'Register',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                 ),
               ),
               const SizedBox(height: 21),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Already have an account?', style: TextStyle(fontSize: 16)),
+                  const Text('Already have an account?',
+                      style: TextStyle(fontSize: 16)),
                   const SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     child: const Text(
                       'Login',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.blue),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.blue),
                     ),
                   ),
                 ],
@@ -207,14 +226,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _signUp(BuildContext context) async {
-    final user = await _auth.createUserWithEmailAndPassword(_email.text, _name.text, _password.text);
-    if (user != null) {
-      log("User created successfully");
-      goToHome(context);
+    setState(() {
+      _isLoading = true; // Set loading to true
+    });
+
+    try {
+      final user = await _auth.createUserWithEmailAndPassword(
+          _email.text, _password.text);
+      if (user != null) {
+        Fluttertoast.showToast(
+            msg: "User Created Successfully", toastLength: Toast.LENGTH_LONG);
+        goToHome(context);
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Error: $e", toastLength: Toast.LENGTH_LONG);
+    } finally {
+      setState(() {
+        _isLoading =
+            false; // Set loading to false regardless of success or error
+      });
     }
   }
 
   void goToHome(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }
