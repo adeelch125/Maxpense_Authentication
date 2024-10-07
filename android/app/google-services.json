@@ -12,7 +12,20 @@
           "package_name": "com.example.max_pense"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "611264861514-iqsm8f37jo5ovmrbfesauq8k7q3k18t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.max_pense",
+            "certificate_hash": "de42806405c636669748b9808f7ad3d2b5b78bbb"
+          }
+        },
+        {
+          "client_id": "611264861514-m2j8kq38i46im5anic0ci5jke0rctvnh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8uidmyVpN_zxVD4-8S1CmYn7vo1I9UeE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611264861514-m2j8kq38i46im5anic0ci5jke0rctvnh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "611264861514-iilpkietalu4va6jhkkh9rdtdnntjp9m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.maxPense"
+              }
+            }
+          ]
         }
       }
     }
