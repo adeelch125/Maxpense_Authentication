@@ -11,7 +11,6 @@ const FirebaseOptions firebaseOptions = FirebaseOptions(
   projectId: "authentication-c91f8",
   storageBucket: "authentication-c91f8.appspot.com", // Optional
 );
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: firebaseOptions);

@@ -133,18 +133,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       height: 56,
       child: OutlinedButton(
         onPressed: () async {
-          try {
-            _showProgressIndicator(); // Show the progress indicator
-            UserCredential? user = await auth.signInWithGoogle();
-            if (user != null) {
-              Fluttertoast.showToast(msg: "User signed in: ${user.user?.displayName}");
-            }
-          } catch (e) {
-            Fluttertoast.showToast(msg: "Sign-in failed: $e");
-          } finally {
-            _hideProgressIndicator(); // Ensure progress indicator is hidden after operation
+          _showProgressIndicator(); // Show the progress indicator
+          UserCredential? user = await auth.loginWithGoogle();
+          if (user != null) {
+            Fluttertoast.showToast(
+                msg: "User signed in: ${user.user?.displayName}");
           }
+          else{
+            Fluttertoast.showToast(msg: 'error');
+          }
+          _hideProgressIndicator();
         },
+            
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -198,7 +198,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Image(image: AssetImage(Assets.iconEmail), height: 20, width: 20),
             SizedBox(width: 10),
             Text(
-              'Continue with Google',
+              'Continue with Email',
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),

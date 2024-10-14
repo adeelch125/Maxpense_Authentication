@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
@@ -26,6 +27,9 @@ class AuthService {
     return null;
   }
 
+
+
+
   Future<User?> loginUserWithEmailAndPassword(String email, String password) async {
     try {
       final cred = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -45,7 +49,18 @@ class AuthService {
     }
   }
 
-  signInWithGoogle() {
-    // Add Google sign-in logic
+  Future<UserCredential?>loginWithGoogle()async{
+    try{
+      final googleUser = await GoogleSignIn().signIn();
+      final googleAuth = await googleUser?.authentication;
+      final cred = GoogleAuthProvider.credential(idToken: googleAuth?.accessToken,accessToken: googleAuth?.accessToken);
+      return await _auth.signInWithCredential(cred);
+    }
+
+    catch(e){
+   log(e.toString());
+    }
+    return null;
   }
+
 }
