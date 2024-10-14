@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:max_pense/screens/auth_service.dart';
+
 import '../assets/assets.dart';
 import '../colors/app_colors.dart';
 import 'login_screen.dart';
@@ -37,7 +38,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
         child: SafeArea(
-          child: SingleChildScrollView(  // Wrap in SingleChildScrollView
+          child: SingleChildScrollView(
+            // Wrap in SingleChildScrollView
             child: Form(
               key: _formKey, // Add Form widget for validation
               child: Column(
@@ -66,7 +68,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter an email';
-                      } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                      } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                          .hasMatch(value)) {
                         return 'Enter a valid email';
                       }
                       return null;
@@ -83,7 +86,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(color: Colors.blue, width: 1.5),
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.5),
                       ),
                     ),
                   ),
@@ -106,7 +110,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(color: Colors.blue, width: 1.5),
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.5),
                       ),
                     ),
                   ),
@@ -132,7 +137,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(color: Colors.blue, width: 1.5),
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.5),
                       ),
                     ),
                   ),
@@ -147,30 +153,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: _isLoading ? null : () => _signUp(context),
                       child: _isLoading
                           ? const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      )
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            )
                           : const Text(
-                        'Register',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                      ),
+                              'Register',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 21),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account?', style: TextStyle(fontSize: 16)),
+                      const Text('Already have an account?',
+                          style: TextStyle(fontSize: 16)),
                       const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
                         },
                         child: const Text(
                           'Login',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.blue),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.blue),
                         ),
                       ),
                     ],
@@ -193,18 +207,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       try {
         final user = await _auth.createUserWithEmailAndPassword(
             _emailController.text.trim(),
-            _passwordController.text.trim(),
-            _nameController.text.trim()
+            _passwordController.text.trim()
         );
         if (user != null) {
-          Fluttertoast.showToast(msg: 'Success',toastLength:Toast.LENGTH_SHORT);
+          Fluttertoast.showToast(msg: 'Success', toastLength: Toast.LENGTH_SHORT);
           goToHome(context);
-        }
-        else{
-          Fluttertoast.showToast(msg: "Error",toastLength: Toast.LENGTH_SHORT);
+        } else {
+          Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
         }
       } catch (e) {
-
         log("Error: $e");
         // You can show a message using Fluttertoast or any other package
       } finally {
@@ -216,6 +227,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void goToHome(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }

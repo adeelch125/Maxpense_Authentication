@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "611264861514-mk699phsfc4i1uqtglcs72boqshqubj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.max_pense",
+            "certificate_hash": "4940a2bc52f8fa3163017f3847a18bd3f12a91da"
+          }
+        },
+        {
           "client_id": "611264861514-m2j8kq38i46im5anic0ci5jke0rctvnh.apps.googleusercontent.com",
           "client_type": 3
         }
