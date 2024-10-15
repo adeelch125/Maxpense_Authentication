@@ -49,18 +49,41 @@ class AuthService {
     }
   }
 
-  Future<UserCredential?>loginWithGoogle()async{
-    try{
+  Future<UserCredential?> loginWithGoogle() async {
+    try {
+      // Trigger the Google Sign-In flow
       final googleUser = await GoogleSignIn().signIn();
-      final googleAuth = await googleUser?.authentication;
-      final cred = GoogleAuthProvider.credential(idToken: googleAuth?.accessToken,accessToken: googleAuth?.accessToken);
-      return await _auth.signInWithCredential(cred);
-    }
 
-    catch(e){
-   log(e.toString());
+      if (googleUser == null) {
+        // User canceled the sign-in
+        Fluttertoast.showToast(msg: 'Google sign-in was canceled');
+        return null;
+      }
+
+      // Obtain the auth details from the request
+      final googleAuth = await googleUser.authentication;
+
+      if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+        // Access token or ID token is missing
+        Fluttertoast.showToast(msg: 'Failed to retrieve authentication tokens');
+        return null;
+      }
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google credential
+      return await _auth.signInWithCredential(credential);
+    } catch (e) {
+      // Log the error for debugging
+      log('Google Sign-In Error: $e');
+      Fluttertoast.showToast(msg: 'An error occurred during Google sign-in');
+      return null;
     }
-    return null;
   }
+
 
 }
