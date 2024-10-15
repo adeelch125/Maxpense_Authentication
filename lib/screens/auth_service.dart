@@ -49,6 +49,8 @@ class AuthService {
     }
   }
 
+
+
   Future<UserCredential?> loginWithGoogle() async {
     try {
       // Trigger the Google Sign-In flow
@@ -83,6 +85,16 @@ class AuthService {
       Fluttertoast.showToast(msg: 'An error occurred during Google sign-in');
       return null;
     }
+  }
+
+  Future<void>sendPasswordResetLink(String email)async{
+    try{
+      await _auth.sendPasswordResetEmail(email: email);
+    }
+    catch(e){
+   log(e.toString());
+    }
+
   }
 
 
